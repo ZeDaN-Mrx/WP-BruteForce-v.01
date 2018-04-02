@@ -81,7 +81,7 @@ class Zedan:
 								print "[!] WP-Login Error :  404\n"+str(Mrx)
 								sys.exit()
 		except Exception, Mrx:
-			print "[!]Usage : script.py http://localhost passlist.txt\n" + str(Mrx)
+			print "[!]Usage : script.py http://localhost passlist.txt 5\n" + str(Mrx)
 			sys.exit()
 
 
