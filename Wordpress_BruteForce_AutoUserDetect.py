@@ -77,6 +77,9 @@ class Zedan:
 									except Exception, Mrx:
 										print "[!]" + str(Mrx)
 										sys.exit()
+								else:
+									print "[!] site:wp-login.php :\n"+str(f)
+									sys.exit()
 							except Exception,Mrx:
 								print "[!] WP-Login Error :  404\n"+str(Mrx)
 								sys.exit()
