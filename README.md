@@ -1,3 +1,3 @@
 # WordpressBruteForce-AutoUserDetector
 Coded By : ZeDaN-Mrx <br/>
-Usage : Script.py http://localhost passlist.txt
+Usage : Script.py http://localhost @pass.txt
