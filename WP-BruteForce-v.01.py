@@ -20,7 +20,7 @@ class Zedan:
 		except:
 			print "[-] Please Check URL !"
 			exit(-1)
-	def xa(slef):
+	def xa(self):
 		print "[+] Scanning"
 		for i in range(int(NUMX)):
 			send = site+'/?author='+str(i)
